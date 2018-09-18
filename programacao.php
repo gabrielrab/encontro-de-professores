@@ -251,7 +251,7 @@
         <div class="card-body cb">     
             
             <p class="card-text">
-                Aguarde a programação ser divulgada...
+                <a href="img/PROGRAMAÇÃO.pdf" download>Baixe aqui a programação do evento</a>
         </p>
         </div>
     </div>

@@ -245,7 +245,7 @@
             <p class="card-text"><ul>
                 <li>Inscrições e envio de resumos: <span style="font-weight: bold">18/09/2018 a 24/09/2018</span></li>
                 <li>Divulgação dos trabalhos aceitos: <span style="font-weight: bold">25/09/2018 a 27/09/2018</span></li>
-                <li>Divulgação da programação: <span style="font-weight: bold">26/09/2018</span></li>
+                <li>Divulgação da programação: <span style="font-weight: bold">18/09/2018</span></li>
                 <li>Evento: <span style="font-weight: bold">28/09/2018 e 29/09/2018</span></li>
             </ul></p>
         </div>

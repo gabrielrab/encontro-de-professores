@@ -185,6 +185,13 @@
             left: 1%;
             font-size: 16px;
         }
+        .card-body ul li{
+            list-style: none;
+
+        }
+        .card-body{
+            margin-bottom: 8%;
+        }
     </style>
 
     <body>
@@ -241,19 +248,93 @@
 
     <div class="card mb-3 cardnot" style="border: 0px solid black; margin-top: 12%;">
         <div class="card-header" style="background-color: white; border-bottom: 1px solid black;"><h4 id="text">Organização do Evento</h4></div>
-        <div class="card-body">      
-            <h5 style="color: darkblue">Comissão Realizadora</h5>
+        <div class="card-body">  
+            <h5 style="color: darkblue">Coordenação Geral</h5>
             <p class="card-text"><ul>
-                <li>Rodrigo Alves dos Santos</li>
-                <li>Luis Augusto Mattos Mendes</li>
-                <li>Maria de Lourdes Couto Nogueira</li>
+                <li>Prof. Doutor Rodrigo Alves dos Santos</br>Departamento de Formação Geral – CEFET-MG Divinópolis
+                </li>
+
             </ul>
             </p>
-            <h5 style="color: darkblue">Comissão de Apoio</h5>
+            </br>
+            <h5 style="color: darkblue">Coordenações Institucionais</h5>
+            <h6>Biblioteca Pública Municipal Ataliba Lago</h6>
             <p class="card-text"><ul>
-                <li>Gabriel Rabelo Camargos </li>
-                <li>Victor Santos Batista</li>
-            </ul></p>
+                <li>Cláudio Gonçalves Guadalupe</li>
+                <li>Sérgio Rezende Costa</li>               
+            </ul>
+            <h6>CEFET-MG – Divinópolis</h6>
+            <p class="card-text"><ul>
+                <li>Anderson Ribeiro de Oliveira Santos Silva</li>
+                <li>Flávio José de Araújo Mateus</li>  
+                <li>Rodrigo Alves dos Santos</li> 
+            </ul>
+            <h6>Superintendência Regional de Ensino de Divinópolis</h6>
+            <p class="card-text"><ul>
+                <li>Andreia Mendes Costa</li>
+                <li>Angelita Pereira dos Santos</li> 
+                <li>Aparecida Valéria da Silva</li>
+                <li>Gislene Machado Pereira</li>
+            </ul>
+            <h6>Sindicado dos Professores do Estado de Minas Gerais</br> 
+                Centro de Referência dos Profissionais de Educação</br> da Secretaria de Educação da Prefeitura de Divinópolis
+            </h6>
+            <p class="card-text"><ul>
+                <li>Rodrigo Rodrigues Ferreira</li>
+
+            </ul>
+            </p>
+            </br>
+            <h5 style="color: darkblue">Comissão Científica</h5>
+            <p class="card-text"><ul>
+                <li>Andreia Mendes Costa</li>
+                <li>Angelita Pereira dos Santos</li>
+                <li>Aparecida Valéria da Silva</li>
+                <li>Cláudio Gonçalves Guadalupe</li>
+                <li>Fernando Antônio Pereira Lemos</li>
+                <li>Gislene Machado Pereira</li>
+                <li>Luiz Carlos Gonçalves</li>
+                <li>Rodrigo Alves dos Santos</li>
+                <li>Rodrigo Rodrigues Ferreira</li>
+                <li>Sérgio Rezende Costa</li>
+            </ul>
+            </p>
+            </br>
+            <h5 style="color: darkblue">Equipes de Trabalho</h5>
+            <p class="card-text">
+            <h6>Informática</h6>
+            <p class="card-text"><ul>
+                <li>Coordenador: Prof. Ms. Luís Augusto Mattos Mendes</br>
+                    Departamento de Informática, Gestão e Design CEFET-MG Divinópolis
+                </li></br>
+                <li>Estagiário: Gabriel Rabelo Camargos</br>
+                    Estudante do Curso Técnico de Informática para Internet – CEFET-MG Divinópolis
+                </li> </br>
+                <li>Estagiário: Victor Santos Batista</br>
+                    Estudante do Curso Técnico de Informática – CEFET-MG Divinópolis
+                </li>  
+            </ul>
+
+            <h6>Design</h6>
+            <p class="card-text"><ul>
+                <li>Coordenadora: Profa. Doutora Maria de Lourdes Couto Nogueira</br>
+                    Departamento de Informática, Gestão e Design CEFET-MG Divinópolis
+                </li></br>
+                <li>Estagiário: Antônio Enrico Liz Silvério Silva </br>
+                    Estudante do Curso Técnico de Produção de Moda – CEFET-MG Divinópolis
+                </li></br> 
+                <li>Estagiária: Vitoria de Souza Barbosa</br>
+                    Estudante do Curso Técnico de Produção de Moda – CEFET-MG Divinópolis
+                </li>               
+            </ul>
+            <h6>Revisão de Textos</h6>
+            <p class="card-text"><ul>
+                <li>Prof. Doutor Fernando Antônio Pereira Lemos</li>
+                <li>Prof. Ms. Luiz Carlos Gonçalves</li>  
+                <li>Prof. Doutor Rodrigo Alves dos Santos</li> 
+            </ul>
+            </p>
+
         </div>
     </div>
 

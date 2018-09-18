@@ -23,7 +23,7 @@ body {
 }
 header{
     padding: 2em;
-};
+}
 .img-header{
     width: 15em;
 }
@@ -47,34 +47,3 @@ textarea{
     width: 350px;
     margin-right: 0.5em;
 }
-<<<<<<< HEAD
-b{
-    color: black;
-}
-
-.logo-header-peq {
-    width: 150px;
-}
-header{
-    padding: 10px;
-}
-.evento {
-    width: 100%;
-    background-color: #8F9ECC;
-    display: flex;
-    justify-content: flex-start;
-    align-content: center;
-    align-items: center;
-    flex-direction: row;
-    margin-bottom: 15px;
-}
-.logo-encontro {
-    width: 150px;
-    margin: 5px 20px 5px 20px;
-}
-.branco{
-    color: white;
-    text-shadow: 1px 1px black;
-}
-=======
->>>>>>> 63f1ecd78343e25eeb84c40c11a3fa3258d05ae3
