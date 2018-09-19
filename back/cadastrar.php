@@ -5,6 +5,7 @@
         <script type="text/jscript" src="../js/script.js"></script>
         <link rel="stylesheet" href="../css/style.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script type="text/javascript" src="js/jquery.validate.js"></script>
     </head>
 <body>
 <header>
@@ -25,6 +26,36 @@
     <img src="../img/cefet-estagio_1.svg" class="logo-encontro">
     <h5 class="branco">VALORIZANDO PRÁTICAS PEDAGÓGICAS POSITIVAS DE PROMOÇÃO DO LETRAMENTO LITERÁRIO</h5>
 </div>
+<div class="container">
+    <?php
+        include_once("banco.php");
+        session_start();
+    
+        $contar = contar_usuarios($conexao);
+        
+        foreach($contar as $num){
+            if($num['count_ouvintes'] >= 65){
+                echo '<div class="alert alert-danger" role="alert">
+                    Lamentamos informar que o limite de vagas na modalidade de <b>Ouvinte</b> está esgotada!
+                </div>';
+                $_SESSION['ouv'] = true;
+            }
+        }
+    
+        
+        $contar2 = contar_usuarios2($conexao);
+        
+        foreach($contar2 as $num2){
+            if($num2['count_autores'] >= 65){
+                echo '<div class="alert alert-danger" role="alert">
+                    Lamentamos informar que o limite de vagas na modalidade de <b>Apresentadores</b> está esgotada!
+                </div>';
+                $_SESSION['aut'] = true;
+            }
+        }
+    
+    ?>
+</div>
 <section class="container">
     <form id="form-singin" method="POST" action="cadastrar-processa.php">
         <h3>Cadastrar Usuário</h3>
@@ -40,8 +71,8 @@
        <h6>Perfil de Cadastro</h6>
        <select name="perfil-cadastro" class="form-control">
            <option hidden>Selecionar Perfil</option>
-           <option>Ouvinte</option>
-           <option>Participante</option>
+           <option  <?php if(isset($_SESSION['erro']) && $_SESSION['ouv'] == true){ echo "disabled"; $_SESSION['ouv'] = false;} ?> >Ouvinte</option>
+           <option <?php if(isset($_SESSION['erro']) && $_SESSION['aut'] == true){ echo "disabled"; $_SESSION['aut'] = false;} ?> >Participante</option>
        </select>
         <h6>Data de Nascimento:</h6>
         <div class="form-inline">    
@@ -126,11 +157,41 @@
            <input type="text" name="f_instituicao" class="form-control" placeholder="Função na Instituição" required>
            <input type="tel" name="telefone_inst" class="form-control" placeholder="Telefone Instituição">
            <input type="email" name="email_inst" class="form-control" placeholder="Email da Instituição">
+           <div class="form-group">
+           <h3>Termos e condições</h3>
+           <small class="form-text text-justify"><input type="checkbox" required> Como apresentador(a) de trabalho e(ou) oficineiro(a), reconheço que o CEFET-MG campus Divinópolis poderá, desde que reconhecida minha autoria, dar ampla divulgação ao mesmo como produção realizada no âmbito do 1º Encontro de Professores de Divinópolis e Região.</small>
+           <small class="form-text text-justify"><input type="checkbox" required> Declaro que o conteúdo o trabalho/oficina apresentando/no 1º Encontro de Formação de Professores de Divinópolis e Região é de minha autoria, em colaboração com os coautores mencionados (quando for o caso), da qual assumo qualquer responsabilidade moral e/ou material em virtude de possível impugnação da obra por parte de terceiros.</small>
+           <small class="form-text text-justify"><input type="checkbox" required> Estou ciente de que o uso de minha imagem poderá ocorrer para efeitos de divulgação do evento e ou publicação de resultados do mesmo no âmbito midiático e científico.</small>
+       </div>
        <div class="form-group">
            <input type="text" name="tipo" value="3" hidden>
            <button type="submit" class="btn btn-primary">Cadastrar</button>
        </div>
     </form>
 </section>
+<script type="text/javascript">
+$(document).ready(function(){
+  $('#formulario').validate({
+    rules: {
+      senha: {
+        required: true
+      },
+      re_senha: {
+        required: true,
+        equalTo: "#senha"
+      },
+    },
+    messages: {
+      senha: {
+        required: "O campo senha é obrigatório."
+      },
+      re_senha: {
+        required: "O campo confirmação de senha é obrigatório.",
+        equalTo: "O campo confirmação de senha deve ser identico ao campo senha."
+      }
+    }
+  });
+});
+</script>
 </body>
 </html>

@@ -35,6 +35,11 @@ session_start();
 <div class="col-6">
     <form action="oficina_cad_processa.php" method="POST" class="form-login">
     <input type="text" name="titulo" class="form-control" placeholder="Titulo da oficina" required>
+    <div class="form-inline">
+        <input type="text" class="form-control col" name="responsavel" placeholder="Responsável" required>
+        <input type="text" class="form-control col" name="formacao" placeholder="Formação" required>
+    </div>
+        <input type="text" class="form-control" name="instituicao" required placeholder="Instituição">
     <h5>Descrição</h5>
     <textarea name="descricao" class="form-control"></textarea>
     <input type="date" class="form-control" name="data" required>

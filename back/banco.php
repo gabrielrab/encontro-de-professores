@@ -20,7 +20,7 @@ if (mysqli_connect_errno($conexao)) {
 }
 
 function cadastrar_usuario($conexao, $enviar, $endereco){
-    $sql = "INSERT INTO usuarios (nome_completo, nome_ident,  data_nasc, sexo, rg, cpf, email, user, senha, telefone, whatsapp, almoco, perfil-cadastro, titulacao, inst_procedencia, instituicao, f_instituicao, telefone_inst, email_inst, tipo) VALUES(
+    $sql = "INSERT INTO usuarios (nome_completo, nome_ident,  data_nasc, sexo, rg, cpf, email, user, senha, telefone, whatsapp, almoco, perfil_cadastro, titulacao, instituicao, f_instituicao, telefone_inst, email_inst, tipo) VALUES(
         '{$enviar['nome_completo']}',
         '{$enviar['nome_ident']}',
         '{$enviar['data_nasc']}',
@@ -35,7 +35,6 @@ function cadastrar_usuario($conexao, $enviar, $endereco){
         '{$enviar['almoco']}',
         '{$enviar['perfil-cadastro']}',
         '{$enviar['titulacao']}',
-        '{$enviar['inst_procedencia']}',
         '{$enviar['instituicao']}',
         '{$enviar['f_instituicao']}',
         '{$enviar['telefone_inst']}',
@@ -44,16 +43,19 @@ function cadastrar_usuario($conexao, $enviar, $endereco){
     );";
     
     //die($sql);
-    mysqli_query($conexao, $sql);
+    mysqli_query($conexao, $sql) or die(mysqli_error($conexao));
     
     $id_usuario = mysqli_insert_id($conexao);
     
-    $sql = "INSERT INTO endereco (id_usuario, rua, bairro, cidade, estado)
+    $sql = "INSERT INTO endereco (id_usuario, rua, complemento, numero, bairro, cidade, cep, estado)
     VALUES(
         '{$id_usuario}',
         '{$endereco['rua']}',
+        '{$endereco['complemento']}',
+        '{$endereco['numero']}',
         '{$endereco['bairro']}',
         '{$endereco['cidade']}',
+        '{$endereco['cep']}',
         '{$endereco['estado']}'
     );";
     
@@ -164,8 +166,11 @@ function buscar_oficina($conexao){
 }
 
 function cadastrar_oficina($conexao, $enviar){
-    $sql = "INSERT INTO oficina_cad (titulo, descricao, dia, status) VALUES(
+    $sql = "INSERT INTO oficina_cad (titulo, responsavel, formacao, instituicao, descricao, dia, status) VALUES(
         '{$enviar['titulo']}',
+        '{$enviar['responsavel']}',
+        '{$enviar['formacao']}',
+        '{$enviar['instituicao']}',
         '{$enviar['descricao']}',
         '{$enviar['dia']}',
         '{$enviar['status']}'
@@ -175,12 +180,40 @@ function cadastrar_oficina($conexao, $enviar){
     
 }
 
-function cadastra_participacao_oficina($conexao, $usuario, $oficina){
-    $sql="INSERT INTO participacao (id_usuario, oficina) VALUES(
-        '{$usuario}',
-        '{$oficina}'
+function cadastra_participacao_oficina($conexao, $inserir){
+    $sql="INSERT INTO participacao (id_usuario, id_oficina, oficina) VALUES(
+        '{$inserir['id_usuario']}',
+        '{$inserir['id_oficina']}',
+        '{$inserir['oficina']}'
     );";
     
     mysqli_query($conexao, $sql) or die(mysqli_error($conexao));
+}
+
+function contar_participacao($conexao, $id_oficina){
+    $sql = "SELECT COUNT(id_participacao) AS count FROM participacao WHERE id_oficina = {$id_oficina};";
+    
+    $resultado = mysqli_query($conexao, $sql) or die(mysqli_error($conexao));
+                 
+    return mysqli_fetch_all($resultado, MYSQLI_ASSOC);
+
+}
+
+function contar_usuarios($conexao){
+    $sql = "SELECT COUNT(id_usuario) AS count_ouvintes FROM usuarios WHERE perfil_cadastro = 'Ouvinte';";
+    
+    $resultado = mysqli_query($conexao, $sql) or die(mysqli_error($conexao));
+                 
+    return mysqli_fetch_all($resultado, MYSQLI_ASSOC);
+
+}
+
+function contar_usuarios2($conexao){
+    $sql = "SELECT COUNT(id_autor) AS count_autores FROM autor;";
+    
+    $resultado = mysqli_query($conexao, $sql) or die(mysqli_error($conexao));
+                 
+    return mysqli_fetch_all($resultado, MYSQLI_ASSOC);
+
 }
 ?>

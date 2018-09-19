@@ -14,7 +14,7 @@ session_start();
     </head>
 <body>
 <header>
-<nav class="nav">
+<nav class="navbar">
   <div class="col">
       <img class="logo-header-peq" src="../img/logo-sigev.svg">
   </div>

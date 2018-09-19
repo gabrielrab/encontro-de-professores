@@ -9,7 +9,7 @@ $user = $_POST['user'];
     
     if($conta >= 1){
        echo '<div class="erro"><h1>O usuário já existe !</h1></div>';
-        sleep(2)
+        sleep(2);
         header('Location: cadastrar.php');
     } else{
         echo "";
@@ -43,7 +43,6 @@ if(isset($_POST['nome_completo']) && $_POST['nome_completo'] != ''){
     
     $enviar['perfil-cadastro'] = $_POST['perfil-cadastro'];
     $enviar['titulacao'] = $_POST['titulacao'];
-    $enviar['inst_procedencia'] = $_POST['inst_procedencia'];
     
     $enviar['instituicao'] = $_POST['instituicao'];
     $enviar['f_instituicao'] = $_POST['f_instituicao'];
@@ -66,9 +65,11 @@ if(isset($_POST['nome_completo']) && $_POST['nome_completo'] != ''){
     $endereco = array();
     
     $endereco['rua'] = $_POST['rua'];
+    $endereco['complemento'] = $_POST['complemento'];
     $endereco['numero'] = $_POST['numero'];
     $endereco['bairro'] = $_POST['bairro'];
     $endereco['cidade'] = $_POST['cidade'];
+    $endereco['cep'] = $_POST['cep'];
     $endereco['estado'] = $_POST['estado'];
     
     $vai = cadastrar_usuario($conexao, $enviar, $endereco);

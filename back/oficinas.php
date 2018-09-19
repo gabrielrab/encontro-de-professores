@@ -31,50 +31,57 @@ session_start();
     <h5 class="branco">VALORIZANDO PRÁTICAS PEDAGÓGICAS POSITIVAS DE PROMOÇÃO DO LETRAMENTO LITERÁRIO</h5>
 </div>
 <section class="container">
-        <h1>Cadastrar participação em Oficinas</h1>
-    <div class="row">
-    <div class="oficinas col">
+    <h1>Cadastrar participação em Oficinas</h1>
+    <div class="oficinas form-inline">
+       
         <?php
         
         $recebe = buscar_oficina($conexao);
         foreach($recebe as $vai):
         ?>
+        <form action="" method="POST">
          <div class="form-control box">
+            <input type="number" value="<?php echo $vai['id_oficina']; ?>" name="id_oficina" hidden>
+            <input type="text" value="<?php echo $vai['titulo']; ?>" name="oficina" hidden>
              <h4><?php echo $vai['titulo']; ?></h4>
+             <h6>Responsável: <?php echo $vai['responsavel']; ?> (<?php echo $vai['instituicao']; ?>)</h6>
              <p class="form-text text-justify"><?php echo $vai['descricao']; ?></p>
              <h6>Dados:</h6>
              <p><?php echo $vai['dia']; ?></p>
-             <p>Status: <b><?php echo $vai['status']; ?></b></p>
-             <h6 class="form-control"><input type="checkbox" name = "oficina[]" value="<?php echo $vai['titulo']; ?>" class="click"> Participar</h6>
+             <p>Status: <b><?php 
+                 $buscar = contar_participacao($conexao, $vai['id_oficina']);
+                 
+                 foreach($buscar as $aqui):
+                     if($aqui['count'] >= 25){
+                         $_SESSION['erro'] = true;
+                         echo "Lotada";
+                     } else{
+                         echo "Disponivel";
+                     }
+            ?></b></p>
+             <button type="submit" class="btn btn-primary" <?php if(isset($_SESSION['erro']) && $_SESSION['erro'] == true){ echo "disabled"; $_SESSION['erro'] = false;} endforeach; ?> >Participar</button>
          </div>
+       </form>
          <?php
         endforeach;
         ?>
-       <a href="painel-user.php">Voltar</a>
-    </div>
-    <div class="col-5 form-control" id="rum">
-        <h3>Oficinas selecionadas</h3>
-        <form action="" method="POST" class="form-sigin">
-        <div class="form-group" id="add_oficinas">
-        </div>
-        <div class="form-group">
-           <button type="submit" class="btn btn-primary">Cadastrar</button>
-       </div>
-        </form>
-        <?php
-            if(isset($_POST['oficina'])){
-                foreach($_POST['oficina'] as $oficina){
-                    $usuario = $_SESSION['id_usuario'];
+    <?php
+        if(isset($_POST['id_oficina'])){
+            $inserir = array();
+                    
+            $inserir['id_usuario'] = $_SESSION['id_usuario'];
+            $inserir['id_oficina'] = $_POST['id_oficina'];
+            $inserir['oficina'] = $_POST['oficina'];
             
-                    $cad = cadastra_participacao_oficina($conexao, $usuario, $oficina);
-                }
-                 echo "Cadastro feito com sucesso!";
+            $cad = cadastra_participacao_oficina($conexao, $inserir);
+                 echo '<script>alert("Cadastro Realizado")</script>';
                 
             }
         ?>
     </div>
-    </div>
+       <a href="painel-user.php">Voltar</a>
 </section>
+<!--
 <script>
     $(".click").change(function(){
        var valor = $(this).val();
@@ -82,5 +89,6 @@ session_start();
        $("#add_oficinas").append($('<input type="text" class="form-control" name ="oficina[]" placeholder="'+ valor +'" value="'+ valor +'">'));
     });
 </script>
+-->
 </body>
 </html>
