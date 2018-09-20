@@ -12,6 +12,7 @@ if(!isset($_SESSION['id_usuario'])){
 <html>
     <head>
         <title>Painel do User</title>
+        <meta charset="utf-8">
         <script type="text/jscript" src="../js/jquery-min.js"></script>
         <script type="text/jscript" src="../js/script.js"></script>
         <link rel="stylesheet" href="../css/style.css">
@@ -33,6 +34,7 @@ if(!isset($_SESSION['id_usuario'])){
   <button class="dropbtn">Olá, <?php echo $_SESSION['nome_ident'] ?></button>
   <div class="dropdown-content">
     <a href="../index.php">Pagina Inicial</a>
+    <a href="perfil.php">Perfil</a>
     <a href="sair.php">Sair</a>
   </div>
 </div>
@@ -94,22 +96,18 @@ if(!isset($_SESSION['id_usuario'])){
    </thead>
    <tbody>
       <tr>   
-<!--
        <?php
-          //$id = $_SESSION['id_usuario'];
+          $id = $_SESSION['id_usuario'];
               
-          //$recebe = buscar_oficinas($conexao, $id);
-          //foreach($recebe as $vai):
+          $recebe = buscar_participacao($conexao, $id);
+          foreach($recebe as $vem):
        ?>
-        <td><?php //echo $vai['nome_trabalho']; ?></td>
-        <td><?php //echo $vai['nome_autores']; ?></td>
-        <td><?php //if($vai['tipo'] == 0){ echo "Trabalho(Poster)";} else{ echo "Oficina"; } ?></td>
-        <td><?php //echo $vai['situacao']; ?></td>
+        <td><?php echo $vem['id_oficina']; ?></td>
+        <td><?php echo utf8_encode($vem['oficina']); ?></td>
       </tr>
       <?php
-       //endforeach;
+       endforeach;
        ?>
--->
    </tbody>
 </table>
 </section>

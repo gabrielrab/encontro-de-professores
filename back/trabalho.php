@@ -6,6 +6,7 @@ session_start();
 <html>
     <head>
         <title>Cadastrar Apresentação</title>
+        <meta charset="utf-8">
         <script type="text/jscript" src="../js/jquery-min.js"></script>
         <script type="text/jscript" src="../js/script.js"></script>
         <link rel="stylesheet" href="../css/style.css">
@@ -24,6 +25,13 @@ session_start();
   <a class="nav-link" href="login.php"><b>Inscrição</b></a>
   <a class="nav-link" href="../programacao.php"><b>Programação</b></a>
   <a class="nav-link" href="../organizacao.php"><b>Organização</b></a>
+  <div class="dropdown">
+  <button class="dropbtn">Olá, <?php echo $_SESSION['nome_ident'] ?></button>
+  <div class="dropdown-content">
+    <a href="../index.php">Pagina Inicial</a>
+    <a href="sair.php">Sair</a>
+  </div>
+</div>
   </div>
 </nav>
 </header>

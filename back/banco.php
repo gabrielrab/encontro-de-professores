@@ -1,15 +1,16 @@
-
 <?php
 
+/*
 $bdServidor = 'localhost';
 $bdUsuario = 'root';
 $bdSenha = '';
-$bdBanco = 'bd-encontro';
+$bdBanco = 'bd-oficial';
+*/
 
-//$bdServidor = 'sql105.epizy.com';
-//$bdUsuario = 'epiz_22584800';
-//$bdSenha = 'lvbTEqinBii';
-//$bdBanco = 'epiz_22584800_encontro';
+$bdServidor = 'sql105.epizy.com';
+$bdUsuario = 'epiz_22584800';
+$bdSenha = 'lvbTEqinBii';
+$bdBanco = 'epiz_22584800_teste';
 
 
 $conexao = mysqli_connect($bdServidor, $bdUsuario, $bdSenha, $bdBanco);
@@ -215,5 +216,29 @@ function contar_usuarios2($conexao){
                  
     return mysqli_fetch_all($resultado, MYSQLI_ASSOC);
 
+}
+
+function buscar_participacao($conexao, $id){
+    $sql = "SELECT * FROM participacao WHERE id_usuario = {$id};";
+    
+      $resultado = mysqli_query($conexao, $sql) or die(mysqli_error($conexao));
+                 
+      return mysqli_fetch_all($resultado, MYSQLI_ASSOC);
+}
+
+function buscar_oficina_menos($conexao, $id){
+    $sql = "SELECT * FROM oficina_cad;";
+    
+    $resultado = mysqli_query($conexao, $sql) or die(mysqli_error($conexao));
+    
+    return mysqli_fetch_all($resultado, MYSQLI_ASSOC);
+}
+
+function buscar_cadastro($conexao, $id, $oficina){
+    $sql = "SELECT COUNT(id_participacao) AS count FROM participacao WHERE id_usuario = {$id} AND id_oficina = {$oficina};";
+    
+    $resultado = mysqli_query($conexao, $sql) or die(mysqli_error($conexao));
+    
+    return mysqli_fetch_all($resultado, MYSQLI_ASSOC);
 }
 ?>

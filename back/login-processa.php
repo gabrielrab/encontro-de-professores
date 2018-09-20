@@ -21,6 +21,9 @@
                 $_SESSION['user'] = $resultado['user'];
                 $_SESSION['senha'] = $resultado['senha'];
                 $_SESSION['tipo'] = $resultado['tipo'];
+                $_SESSION['nome_completo'] = $resultado['nome_completo'];
+                $_SESSION['user'] = $resultado['user'];
+                $_SESSION['perfil_cadastro'] = $resultado['perfil_cadastro'];
                 
                 
                 if($_SESSION['tipo'] == '2'){

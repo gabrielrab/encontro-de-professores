@@ -6,6 +6,7 @@ session_start();
 <html>
     <head>
         <title>Cadastrar Oficinas</title>
+        <meta charset="utf-8">
         <script type="text/jscript" src="../js/jquery-min.js"></script>
         <script type="text/jscript" src="../js/script.js"></script>
         <link rel="stylesheet" href="../css/style.css">
@@ -13,7 +14,7 @@ session_start();
     </head>
 <body>
 <header>
-<nav class="nav">
+<nav class="navbar">
   <div class="col">
       <img class="logo-header-peq" src="../img/logo-sigev.svg">
   </div>
@@ -23,6 +24,14 @@ session_start();
   <a class="nav-link" href="login.php"><b>Inscrição</b></a>
   <a class="nav-link" href="../programacao.php"><b>Programação</b></a>
   <a class="nav-link" href="../organizacao.php"><b>Organização</b></a>
+  <div class="dropdown">
+  <button class="dropbtn">Olá, <?php echo $_SESSION['nome_ident'] ?></button>
+  <div class="dropdown-content">
+    <a href="../index.php">Pagina Inicial</a>
+    <a href="perfil.php">Perfil</a>
+    <a href="sair.php">Sair</a>
+  </div>
+</div>
   </div>
 </nav>
 </header>
@@ -32,20 +41,33 @@ session_start();
 </div>
 <section class="container">
     <h1>Cadastrar participação em Oficinas</h1>
-    <div class="oficinas form-inline">
+    <div class="oficinas form-group">
        
         <?php
         
-        $recebe = buscar_oficina($conexao);
+        $id = $_SESSION['id_usuario'];
+        
+        $recebe = buscar_oficina_menos($conexao, $id);
         foreach($recebe as $vai):
         ?>
-        <form action="" method="POST">
+        <form action="" method="POST"
+        <?php
+            $oficina = $vai['id_oficina'];
+            
+            $tenta = buscar_cadastro($conexao, $id, $oficina);
+            
+            foreach($tenta as $teste){
+                if($teste['count'] > 0){
+                    echo "hidden";
+                }
+            }
+        ?> > <!--FECHAMENTO DO FORM !-->
          <div class="form-control box">
-            <input type="number" value="<?php echo $vai['id_oficina']; ?>" name="id_oficina" hidden>
+            <input type="number" value="<?php echo utf8_encode($vai['id_oficina']); ?>" name="id_oficina" hidden>
             <input type="text" value="<?php echo $vai['titulo']; ?>" name="oficina" hidden>
-             <h4><?php echo $vai['titulo']; ?></h4>
-             <h6>Responsável: <?php echo $vai['responsavel']; ?> (<?php echo $vai['instituicao']; ?>)</h6>
-             <p class="form-text text-justify"><?php echo $vai['descricao']; ?></p>
+             <h5><?php echo  utf8_encode($vai['titulo']); ?></h5>
+             <h6>Responsável: <?php echo utf8_encode($vai['responsavel']); ?> (<?php echo utf8_encode($vai['instituicao']); ?>)</h6>
+             <p class="form-text text-justify"><?php echo utf8_encode($vai['descricao']); ?></p>
              <h6>Dados:</h6>
              <p><?php echo $vai['dia']; ?></p>
              <p>Status: <b><?php 
@@ -74,8 +96,7 @@ session_start();
             $inserir['oficina'] = $_POST['oficina'];
             
             $cad = cadastra_participacao_oficina($conexao, $inserir);
-                 echo '<script>alert("Cadastro Realizado")</script>';
-                
+                 echo '<script>alert("Cadastro Realizado");</script>';
             }
         ?>
     </div>

@@ -2,10 +2,16 @@
 include_once("banco.php");
 session_start();
 
+if(!isset($_SESSION['id_usuario'])){
+    header('Location: login.php');
+} else{
+    //
+}
+
 ?>
 <html>
     <head>
-        <title>Cadastrar Oficinas</title>
+        <title>Perfil</title>
         <meta charset="utf-8">
         <script type="text/jscript" src="../js/jquery-min.js"></script>
         <script type="text/jscript" src="../js/script.js"></script>
@@ -14,7 +20,7 @@ session_start();
     </head>
 <body>
 <header>
-<nav class="nav">
+<nav class="navbar">
   <div class="col">
       <img class="logo-header-peq" src="../img/logo-sigev.svg">
   </div>
@@ -24,6 +30,14 @@ session_start();
   <a class="nav-link" href="login.php"><b>Inscrição</b></a>
   <a class="nav-link" href="../programacao.php"><b>Programação</b></a>
   <a class="nav-link" href="../organizacao.php"><b>Organização</b></a>
+  <div class="dropdown">
+  <button class="dropbtn">Olá, <?php echo $_SESSION['nome_ident'] ?></button>
+  <div class="dropdown-content">
+    <a href="../index.php">Pagina Inicial</a>
+    <a href="perfil.php">Perfil</a>
+    <a href="sair.php">Sair</a>
+  </div>
+</div>
   </div>
 </nav>
 </header>
@@ -32,29 +46,11 @@ session_start();
     <h5 class="branco">VALORIZANDO PRÁTICAS PEDAGÓGICAS POSITIVAS DE PROMOÇÃO DO LETRAMENTO LITERÁRIO</h5>
 </div>
 <section class="container">
-<h1>Cadastrar Oficinas</h1>
-<div class="col-6">
-    <form action="oficina_cad_processa.php" method="POST" class="form-login">
-    <input type="text" name="titulo" class="form-control" placeholder="Titulo da oficina" required>
-    <div class="form-inline">
-        <input type="text" class="form-control col" name="responsavel" placeholder="Responsável" required>
-        <input type="text" class="form-control col" name="formacao" placeholder="Formação" required>
-    </div>
-        <input type="text" class="form-control" name="instituicao" required placeholder="Instituição">
-    <h5>Descrição</h5>
-    <textarea name="descricao" class="form-control"></textarea>
-    <input type="date" class="form-control" name="data" required>
-    <select name="status" class="form-control" required>
-        <option hidden>Selecionar status</option>
-        <option>Disponivel</option>
-        <option>Lotada</option>
-        <option>Indisponivel</option>
-    </select>
-    <div class="form-inline">
-        <input type="submit" class="btn btn-success" name="enviar">
-        <a href="painel.adm.php" class="btn btn-primary">Voltar</a>
-    </div>
-</form>
+<div class="form-group">    
+    <h3>Dados do Usuário</h3>
+    <h5>Nome: <?php echo $_SESSION['nome_completo']; ?></h5>
+    <h5>Nome de Usuário: <?php echo $_SESSION['user']; ?></h5>
+    <h5>Perifil de Cadastro: <?php echo $_SESSION['perfil_cadastro']; ?></h5>
 </div>
 </section>
 </body>

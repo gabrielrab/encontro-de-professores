@@ -1,6 +1,7 @@
 <html>
     <head>
         <title>Cadastar</title>
+        <meta charset="utf-8">
         <script type="text/jscript" src="../js/jquery-min.js"></script>
         <script type="text/jscript" src="../js/script.js"></script>
         <link rel="stylesheet" href="../css/style.css">

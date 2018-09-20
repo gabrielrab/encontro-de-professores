@@ -45,6 +45,7 @@ textarea{
 }
 .box{
     max-width: 500px;
+    min-height: 200px;
     margin-right: 1em;
 }
 b{
