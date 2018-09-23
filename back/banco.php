@@ -1,11 +1,9 @@
 <?php
 
-/*
-$bdServidor = 'localhost';
+/*$bdServidor = 'localhost';
 $bdUsuario = 'root';
 $bdSenha = '';
-$bdBanco = 'bd-oficial';
-*/
+$bdBanco = 'bd-oficial';*/
 
 $bdServidor = 'sql105.epizy.com';
 $bdUsuario = 'epiz_22584800';
@@ -236,6 +234,14 @@ function buscar_oficina_menos($conexao, $id){
 
 function buscar_cadastro($conexao, $id, $oficina){
     $sql = "SELECT COUNT(id_participacao) AS count FROM participacao WHERE id_usuario = {$id} AND id_oficina = {$oficina};";
+    
+    $resultado = mysqli_query($conexao, $sql) or die(mysqli_error($conexao));
+    
+    return mysqli_fetch_all($resultado, MYSQLI_ASSOC);
+}
+
+function buscar_cpf($conexao, $cpf){
+    $sql = "SELECT COUNT(cpf) as cpf FROM usuarios WHERE cpf = {$cpf};";
     
     $resultado = mysqli_query($conexao, $sql) or die(mysqli_error($conexao));
     

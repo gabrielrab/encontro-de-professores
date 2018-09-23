@@ -58,7 +58,7 @@
     ?>
 </div>
 <section class="container">
-    <form id="form-singin" method="POST" action="cadastrar-processa.php">
+    <form id="form-singin" method="POST" action="cadastrar-processa.php" id="formulario">
         <h3>Cadastrar Usuário</h3>
        <div class="form-group">
        <h6>Dados do Usuário</h6>
@@ -70,23 +70,23 @@
             <input type="password" name="re-senha" class="form-control col" placeholder="Confirmação da senha" required size="20">
         </div>
        <h6>Perfil de Cadastro</h6>
-       <select name="perfil-cadastro" class="form-control">
+       <select name="perfil-cadastro" id="perfil-cadastro"  class="form-control" required>
            <option hidden>Selecionar Perfil</option>
-           <option  <?php if(isset($_SESSION['erro']) && $_SESSION['ouv'] == true){ echo "disabled"; $_SESSION['ouv'] = false;} ?> >Ouvinte</option>
-           <option <?php if(isset($_SESSION['erro']) && $_SESSION['aut'] == true){ echo "disabled"; $_SESSION['aut'] = false;} ?> >Participante</option>
+           <option  value = "Ouvinte" <?php if(isset($_SESSION['erro']) && $_SESSION['ouv'] == true){ echo "disabled"; $_SESSION['ouv'] = false;} ?> >Ouvinte (não apresenta banner)</option>
+           <option value = "Participante" <?php if(isset($_SESSION['erro']) && $_SESSION['aut'] == true){ echo "disabled"; $_SESSION['aut'] = false;} ?> >Participante (apresenta banner)</option>
        </select>
         <h6>Data de Nascimento:</h6>
         <div class="form-inline">    
         <input type="date" name="data_nasc" class="form-control col" required>
-        <select class="form-control col" name="sexo">
+        <select class="form-control col" name="sexo" required>
             <option hidden>Selecione seu sexo</option>
             <option>Masculino</option>
             <option>Feminino</option>
         </select>
         </div>
         <div class="form-inline">
-            <input type="number" class="form-control col" name="rg" placeholder="RG" required>
-            <input type="number" class="form-control col" name="cpf" placeholder="CPF" required>
+            <input type="number" class="form-control col" name="rg" placeholder="RG" required maxlength="10">
+            <input type="number" class="form-control col" name="cpf" placeholder="CPF" required maxlength="11" size="11" id="cpf">
         </div>
         <h6>Endereço:</h6>
         <div class="form-group">
@@ -139,7 +139,7 @@
             <input type="checkbox" class="" name="whatsapp"> Numero com WhatsApp
         </label><br>
         <label class="">
-            <input type="checkbox" class="" name="almoco" title="Desejo almoçar na instuição nos dias do evento"> Desejo almoçar na instituição
+            <input type="checkbox" class="" name="almoco" title="Desejo almoçar na instuição nos dias do evento"> Desejo almoçar na instituição(Dia 28/09, ao preço promocional de R$ 5,00)
         </label>
        </div>
        <h6>Maior Titulação:</h6>
@@ -160,37 +160,67 @@
            <input type="email" name="email_inst" class="form-control" placeholder="Email da Instituição">
            <div class="form-group">
            <h3>Termos e condições</h3>
-           <small class="form-text text-justify"><input type="checkbox" required> Como apresentador(a) de trabalho e(ou) oficineiro(a), reconheço que o CEFET-MG campus Divinópolis poderá, desde que reconhecida minha autoria, dar ampla divulgação ao mesmo como produção realizada no âmbito do 1º Encontro de Professores de Divinópolis e Região.</small>
-           <small class="form-text text-justify"><input type="checkbox" required> Declaro que o conteúdo o trabalho/oficina apresentando/no 1º Encontro de Formação de Professores de Divinópolis e Região é de minha autoria, em colaboração com os coautores mencionados (quando for o caso), da qual assumo qualquer responsabilidade moral e/ou material em virtude de possível impugnação da obra por parte de terceiros.</small>
+           <small class="form-text text-justify nao"><input type="checkbox" required> Como apresentador(a) de trabalho, e(ou) oficineiro(a) reconheço que o CEFET-MG campus Divinópolis poderá, desde que reconhecida minha autoria, dar ampla divulgação ao mesmo como produção realizada no âmbito do 1º Encontro de Professores de Divinópolis e Região.</small>
+           <small class="form-text text-justify nao"><input type="checkbox" required> Declaro que o conteúdo o trabalho/oficina apresentando/no 1º Encontro de Formação de Professores de Divinópolis e Região é de minha autoria, em colaboração com os coautores mencionados (quando for o caso), da qual assumo qualquer responsabilidade moral e/ou material em virtude de possível impugnação da obra por parte de terceiros.</small>
            <small class="form-text text-justify"><input type="checkbox" required> Estou ciente de que o uso de minha imagem poderá ocorrer para efeitos de divulgação do evento e ou publicação de resultados do mesmo no âmbito midiático e científico.</small>
        </div>
        <div class="form-group">
            <input type="text" name="tipo" value="3" hidden>
-           <button type="submit" class="btn btn-primary">Cadastrar</button>
+           <button type="reset" class="btn btn-primary">Limpar</button>
+           <button type="submit" class="btn btn-success" id="btn-enviar" disabled>Cadastrar</button>
        </div>
     </form>
 </section>
 <script type="text/javascript">
-$(document).ready(function(){
-  $('#formulario').validate({
-    rules: {
-      senha: {
-        required: true
-      },
-      re_senha: {
-        required: true,
-        equalTo: "#senha"
-      },
-    },
-    messages: {
-      senha: {
-        required: "O campo senha é obrigatório."
-      },
-      re_senha: {
-        required: "O campo confirmação de senha é obrigatório.",
-        equalTo: "O campo confirmação de senha deve ser identico ao campo senha."
+$(document).ready(function(){    
+//  $('#formulario').validate({
+//    rules: {
+//      senha: {
+//        required: true
+//      },
+//      re_senha: {
+//        required: true,
+//        equalTo: "#senha"
+//      },
+//    },
+//    messages: {
+//      senha: {
+//        required: "O campo senha é obrigatório."
+//      },
+//      re_senha: {
+//        required: "O campo confirmação de senha é obrigatório.",
+//        equalTo: "O campo confirmação de senha deve ser identico ao campo senha."
+//      }
+//    }
+//  });
+    
+  $('#perfil-cadastro').change(function(){
+      valor = $('#perfil-cadastro').val();
+      //alert("op");
+    
+      if(valor == 'Ouvinte'){
+        $('.nao').remove();
       }
+      
+  });
+    
+  $('#cpf').change(function(){
+    var dados = $('#cpf').serialize();
+    $.ajax({
+    type: 'POST',
+    dataType: 'json',
+    url: 'validar_cpf.php',
+    async: true,
+    data: dados,
+    success: function(response) {
+        if(response["0"].cpf > 0){
+            alert("O cpf digitado já foi cadastrado");
+            $("#btn-enviar").prop('disabled', true);
+        } else{
+            $("#btn-enviar").prop('disabled', false);
+        }
     }
+})  
   });
 });
 </script>
